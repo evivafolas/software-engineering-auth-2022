@@ -1,0 +1,793 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the Interview Now API.\n",
+    "version": "1.0",
+    "title": "InterviewNow API",
+    "termsOfService": "http://swagger.io/terms/",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/folasded/interviewnow/1.0.0",
+  "tags": [
+    {
+      "name": "assignment",
+      "description": "Operations about assignments"
+    },
+    {
+      "name": "manager",
+      "description": "Operations about managers"
+    },
+    {
+      "name": "user",
+      "description": "Operations about users"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add User Details",
+        "description": "Create a User and add User's Personal Details",
+        "operationId": "addUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userDetails",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/user/{userID}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Find User by UserID",
+        "operationId": "getUserID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "User ID of user to find.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update user",
+        "description": "Update User Deatails by a logged in User.",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated User Details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful"
+          },
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete user",
+        "description": "Delete a User.",
+        "operationId": "deleteUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "The User ID of the user to be deleted",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful"
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/user/{userID}/assignment": {
+      "get": {
+        "tags": [
+          "user",
+          "assignment"
+        ],
+        "summary": "Returns the assignments of a user.",
+        "description": "Finds all of the Assignments associated with a user.",
+        "operationId": "findAssignmentsbyUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/assignment"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "404": {
+            "description": "User Not Found"
+          }
+        }
+      }
+    },
+    "/manager": {
+      "post": {
+        "tags": [
+          "manager"
+        ],
+        "summary": "Add Manager Details",
+        "description": "Create a Manager and add Manager's Details",
+        "operationId": "addManager",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "managerDetails",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/manager/{managerID}": {
+      "get": {
+        "tags": [
+          "manager"
+        ],
+        "summary": "Find User by ManagerID",
+        "operationId": "getManagerID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "managerID",
+            "in": "path",
+            "description": "Manager ID of user to find.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "Manager not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "manager"
+        ],
+        "summary": "Update Manager",
+        "description": "Update Manager Deatails by a logged in User.",
+        "operationId": "updateManager",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "managerID",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated Manager Details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Manager"
+            }
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful"
+          },
+          "400": {
+            "description": "Invalid Manager supplied"
+          },
+          "404": {
+            "description": "Manager not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "manager"
+        ],
+        "summary": "Delete manager",
+        "description": "Delete a Manager.",
+        "operationId": "deleteManager",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "managerID",
+            "in": "path",
+            "description": "The Manager ID of the user to be deleted",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful"
+          },
+          "400": {
+            "description": "Invalid manager supplied"
+          },
+          "404": {
+            "description": "Manager not found"
+          }
+        }
+      }
+    },
+    "/manager/{managerID}/assignment": {
+      "get": {
+        "tags": [
+          "manager",
+          "assignment"
+        ],
+        "summary": "Returns the assignments of a manager.",
+        "description": "Finds all of the Assignments associated with a manager.",
+        "operationId": "findAssignmentsbyManager",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "managerID",
+            "in": "path",
+            "description": "Manager ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/assignment"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "404": {
+            "description": "User Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "assignment",
+          "manager"
+        ],
+        "summary": "Create a new assignment",
+        "operationId": "addAssignment",
+        "consumes": [
+          "application/json",
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "assignmentDetails",
+            "description": "Assignment Details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/assignment"
+            }
+          },
+          {
+            "name": "managerID",
+            "in": "path",
+            "description": "Manager Identification Number",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "schema": {
+              "$ref": "#/definitions/assignment"
+            }
+          },
+          "400": {
+            "description": "Invalid Input"
+          },
+          "404": {
+            "description": "Assignment not found"
+          }
+        }
+      }
+    },
+    "/manager/{managerID}/assignment/{ual}": {
+      "put": {
+        "tags": [
+          "assignment"
+        ],
+        "summary": "Update an existing assignment",
+        "operationId": "updateAssignment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ual",
+            "in": "path",
+            "description": "UAL",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managerID",
+            "in": "path",
+            "description": "Manager ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Assignment associated with the Manager and User",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/assignment"
+            }
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Assignment not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "manager",
+          "assignment"
+        ],
+        "summary": "Deletes a specific assignment associated with a manager",
+        "description": "Deletes a manger's assignment.",
+        "operationId": "deleteAssignmentbyManager",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "managerID",
+            "in": "path",
+            "description": "Manager ID",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "ual",
+            "in": "path",
+            "description": "UAL",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful"
+          },
+          "400": {
+            "description": "Invalid Input"
+          },
+          "404": {
+            "description": "UAL not found"
+          }
+        }
+      }
+    },
+    "/assignment/{ual}": {
+      "get": {
+        "tags": [
+          "assignment"
+        ],
+        "summary": "Return Assignment",
+        "operationId": "findAssignment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ual",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "schema": {
+              "$ref": "#/definitions/assignment"
+            }
+          },
+          "400": {
+            "description": "Invalid Input"
+          },
+          "404": {
+            "description": "Assignment Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "assignment"
+        ],
+        "summary": "Deletes an assignment",
+        "operationId": "deleteAssignment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ual",
+            "in": "path",
+            "description": "UAL of Assignment to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "JWTbearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Assignment not found"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "JWTbearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "assignment": {
+      "type": "object",
+      "properties": {
+        "ual": {
+          "type": "string"
+        },
+        "userID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "managerID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timeForCompletion": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "Assignment Status",
+          "enum": [
+            "ready",
+            "pending",
+            "completed"
+          ]
+        },
+        "submitted": {
+          "type": "boolean",
+          "default": false
+        },
+        "quiz": {
+          "$ref": "#/definitions/assignment_quiz"
+        }
+      },
+      "xml": {
+        "name": "Assignment"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "userID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string"
+        },
+        "fieldOfInterest": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Manager": {
+      "type": "object",
+      "properties": {
+        "managerID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Manager"
+      }
+    },
+    "assignment_quiz": {
+      "type": "object",
+      "properties": {
+        "quizID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "duration": {
+          "type": "string",
+          "format": "time"
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

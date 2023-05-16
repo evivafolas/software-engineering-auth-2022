@@ -1,0 +1,120 @@
+[
+    {
+        "id": "b01be559.76e07",
+        "type": "tab",
+        "label": "Ροη endpoint PUT /manager/:managerID",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8fcb9cd85443b7ef",
+        "type": "tcp request",
+        "z": "b01be559.76e07",
+        "name": "Mongo DB",
+        "server": "",
+        "port": "",
+        "out": "time",
+        "ret": "buffer",
+        "splitc": "0",
+        "newline": "",
+        "tls": "",
+        "x": 1210,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f2d02f29ee1ce9b1",
+        "type": "http in",
+        "z": "b01be559.76e07",
+        "name": "PUT managers",
+        "url": "http://localhost:1880/manager/:managerID",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 780,
+        "y": 420,
+        "wires": [
+            [
+                "8fcb9cd85443b7ef",
+                "e166ce3b029428c6",
+                "a8ed63af44ac832a"
+            ]
+        ]
+    },
+    {
+        "id": "44cde5ad98d0e89e",
+        "type": "http response",
+        "z": "b01be559.76e07",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1530,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a8ed63af44ac832a",
+        "type": "debug",
+        "z": "b01be559.76e07",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "8d27a64316d95d65",
+        "type": "comment",
+        "z": "b01be559.76e07",
+        "name": "Updating manager with specific managerID",
+        "info": "",
+        "x": 870,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7adc150e1ae6c8bf",
+        "type": "comment",
+        "z": "b01be559.76e07",
+        "name": "PUT /manager/:managerID",
+        "info": "",
+        "x": 810,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e166ce3b029428c6",
+        "type": "change",
+        "z": "b01be559.76e07",
+        "name": "Set Headers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1230,
+        "y": 420,
+        "wires": [
+            [
+                "44cde5ad98d0e89e"
+            ]
+        ]
+    }
+]
